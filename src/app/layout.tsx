@@ -17,7 +17,7 @@ const jetBrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Sazzad Rahman | Android Developer",
+  title: "Sazzad Hossain Foysal | Android Developer",
   description:
     "Android developer building high-performance apps with Kotlin, Jetpack, and clean architecture.",
 };
