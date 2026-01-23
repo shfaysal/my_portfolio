@@ -1,36 +1,51 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Android Developer Portfolio
+
+A clean, modern portfolio website for an Android developer. Built with Next.js (App Router), TypeScript, and Tailwind-powered base styles, with custom CSS for the visual system. Includes a contact form with server-side validation, project detail pages, and a lightweight blog.
+
+## Features
+- Responsive single-page home with hero, projects, skills, about, and contact
+- Project listing + detail pages
+- Blog listing + detail pages
+- Light/dark theme toggle with persisted preference
+- Scroll-reveal animations
+- Contact form validation via API route
+
+## Screenshots
+> Replace these demo visuals with real screenshots from your apps.
+
+![Home](public/images/demo-trackify.svg)
+![Projects](public/images/demo-pulsepay.svg)
+![Project Detail](public/images/demo-clinicnow.svg)
+
+## Tech Stack
+- Next.js (App Router)
+- TypeScript
+- Tailwind CSS + custom CSS theme
 
 ## Getting Started
-
-First, run the development server:
+Install dependencies and run the dev server:
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open `http://localhost:3000` in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project Structure
+- `src/app/` — routes and pages
+- `src/components/` — UI components
+- `src/lib/` — project and blog data
+- `public/images/` — demo images
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Contact Form
+The API route at `src/app/api/contact/route.ts` validates submissions but does not send email yet. Hook this up to an email provider (Resend/SendGrid) when ready.
 
-## Learn More
+## Customize Content
+Update these files with your real data:
+- `src/app/page.tsx` (hero, sections, contact links)
+- `src/lib/projects.ts` (project details)
+- `src/lib/posts.ts` (blog entries)
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## License
+MIT (add your license choice if different).
