@@ -2,10 +2,10 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
-import { projects } from "@/lib/projects";
+import { getProjectBySlug, getProjects } from "@/lib/content";
 
 export function generateStaticParams() {
-  return projects.map((project) => ({ slug: project.slug }));
+  return getProjects().map((project) => ({ slug: project.slug }));
 }
 
 export default function ProjectDetail({
@@ -13,7 +13,7 @@ export default function ProjectDetail({
 }: {
   params: { slug: string };
 }) {
-  const project = projects.find((item) => item.slug === params.slug);
+  const project = getProjectBySlug(params.slug);
 
   if (!project) {
     notFound();
@@ -43,11 +43,7 @@ export default function ProjectDetail({
         <section className="detail-grid" data-reveal>
           <div>
             <h2>Highlights</h2>
-            <ul>
-              {project.highlights.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
+            <div dangerouslySetInnerHTML={{ __html: project.html }} />
           </div>
           <div>
             <h2>Stack</h2>

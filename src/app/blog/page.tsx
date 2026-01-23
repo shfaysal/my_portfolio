@@ -1,9 +1,11 @@
 import Link from "next/link";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
-import { posts } from "@/lib/posts";
+import { getPosts } from "@/lib/content";
 
 export default function BlogPage() {
+  const posts = getPosts();
+
   return (
     <div className="page">
       <SiteHeader />

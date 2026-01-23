@@ -2,10 +2,10 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
-import { posts } from "@/lib/posts";
+import { getPostBySlug, getPosts } from "@/lib/content";
 
 export function generateStaticParams() {
-  return posts.map((post) => ({ slug: post.slug }));
+  return getPosts().map((post) => ({ slug: post.slug }));
 }
 
 export default function BlogDetail({
@@ -13,7 +13,7 @@ export default function BlogDetail({
 }: {
   params: { slug: string };
 }) {
-  const post = posts.find((item) => item.slug === params.slug);
+  const post = getPostBySlug(params.slug);
 
   if (!post) {
     notFound();
@@ -34,11 +34,11 @@ export default function BlogDetail({
             <span>{post.tags.join(" · ")}</span>
           </div>
         </section>
-        <section className="detail-body" data-reveal>
-          {post.body.map((paragraph) => (
-            <p key={paragraph}>{paragraph}</p>
-          ))}
-        </section>
+        <section
+          className="detail-body"
+          data-reveal
+          dangerouslySetInnerHTML={{ __html: post.html }}
+        />
       </main>
       <SiteFooter />
     </div>

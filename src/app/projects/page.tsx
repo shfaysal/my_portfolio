@@ -1,9 +1,11 @@
 import Link from "next/link";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
-import { projects } from "@/lib/projects";
+import { getProjects } from "@/lib/content";
 
 export default function ProjectsPage() {
+  const projects = getProjects();
+
   return (
     <div className="page">
       <SiteHeader />

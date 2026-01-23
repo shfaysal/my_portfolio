@@ -1,8 +1,11 @@
 import ContactForm from "@/components/ContactForm";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
+import { getProjects } from "@/lib/content";
 
 export default function Home() {
+  const projects = getProjects().slice(0, 3);
+
   return (
     <div className="page">
       <SiteHeader />
@@ -66,62 +69,24 @@ export default function Home() {
             </p>
           </div>
           <div className="grid">
-            <article className="card" data-reveal>
-              <img
-                className="card-image"
-                src="/images/demo-trackify.svg"
-                alt="Trackify app preview"
-                loading="lazy"
-              />
-              <h3>Trackify</h3>
-              <p>
-                Habit tracker with offline-first storage and streak analytics.
-                Increased weekly retention by 24%.
-              </p>
-              <div className="card-meta">
-                <span>Kotlin</span>
-                <span>Room</span>
-                <span>WorkManager</span>
-              </div>
-              <a href="/projects/trackify">Case study</a>
-            </article>
-            <article className="card" data-reveal>
-              <img
-                className="card-image"
-                src="/images/demo-pulsepay.svg"
-                alt="PulsePay app preview"
-                loading="lazy"
-              />
-              <h3>PulsePay</h3>
-              <p>
-                Secure payments app with biometric auth and real-time alerts.
-                Reduced crash rate by 35%.
-              </p>
-              <div className="card-meta">
-                <span>Compose</span>
-                <span>Hilt</span>
-                <span>Firebase</span>
-              </div>
-              <a href="/projects/pulsepay">Case study</a>
-            </article>
-            <article className="card" data-reveal>
-              <img
-                className="card-image"
-                src="/images/demo-clinicnow.svg"
-                alt="ClinicNow app preview"
-                loading="lazy"
-              />
-              <h3>ClinicNow</h3>
-              <p>
-                Telehealth scheduling and messaging app serving 50k+ users.
-              </p>
-              <div className="card-meta">
-                <span>Retrofit</span>
-                <span>GraphQL</span>
-                <span>DataStore</span>
-              </div>
-              <a href="/projects/clinicnow">Case study</a>
-            </article>
+            {projects.map((project) => (
+              <article key={project.slug} className="card" data-reveal>
+                <img
+                  className="card-image"
+                  src={project.image}
+                  alt={`${project.title} app preview`}
+                  loading="lazy"
+                />
+                <h3>{project.title}</h3>
+                <p>{project.summary}</p>
+                <div className="card-meta">
+                  {project.stack.slice(0, 3).map((item) => (
+                    <span key={item}>{item}</span>
+                  ))}
+                </div>
+                <a href={`/projects/${project.slug}`}>Case study</a>
+              </article>
+            ))}
           </div>
         </section>
 
@@ -182,7 +147,11 @@ export default function Home() {
               <a href="mailto:sazzadfaysal671@gmail.com">
                 sazzadfaysal671@gmail.com
               </a>
-              <a href="https://github.com/shfaysal" target="_blank" rel="noreferrer">
+              <a
+                href="https://github.com/shfaysal"
+                target="_blank"
+                rel="noreferrer"
+              >
                 GitHub
               </a>
               <a
