@@ -5,7 +5,7 @@ export default function SiteHeader() {
   return (
     <header className="nav">
       <Link className="logo" href="/">
-        SR
+        SHF
       </Link>
       <nav aria-label="Primary">
         <Link href="/#projects">Projects</Link>
