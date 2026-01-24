@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@import "@fontsource/space-grotesk/index.css";
+@import "@fontsource/jetbrains-mono/index.css";
 
 :root {
   --bg: #f6f7fb;
@@ -11,6 +13,11 @@
   --stroke: rgba(15, 23, 42, 0.1);
   --radius: 20px;
   --shadow: 0 20px 60px rgba(15, 23, 42, 0.08);
+  --font-space: "Space Grotesk", ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans",
+    sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Monaco,
+    Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
 * {
@@ -101,7 +108,7 @@ body {
 }
 
 .eyebrow {
-  font-family: var(--font-mono), "JetBrains Mono", monospace;
+  font-family: var(--font-mono);
   letter-spacing: 2px;
   text-transform: uppercase;
   color: var(--accent);
@@ -275,7 +282,7 @@ section {
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
-  font-family: var(--font-mono), "JetBrains Mono", monospace;
+  font-family: var(--font-mono);
   font-size: 0.8rem;
   color: #b45309;
 }

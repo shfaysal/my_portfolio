@@ -9,6 +9,8 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@fontsource/jetbrains-mono": "^5.0.29",
+    "@fontsource/space-grotesk": "^5.0.29",
     "gray-matter": "^4.0.3",
     "marked": "^17.0.1",
     "next": "16.1.4",

@@ -1,20 +1,7 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import { JetBrains_Mono, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import ScrollAnimator from "@/components/ScrollAnimator";
-
-const spaceGrotesk = Space_Grotesk({
-  subsets: ["latin"],
-  variable: "--font-space",
-  display: "swap",
-});
-
-const jetBrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-mono",
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   title: "Sazzad Hossain Foysal | Android Developer",
@@ -29,10 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${spaceGrotesk.variable} ${jetBrainsMono.variable}`}
-        suppressHydrationWarning
-      >
+      <body suppressHydrationWarning>
         <Script id="theme-init" strategy="beforeInteractive">
           {`(function(){
   try {

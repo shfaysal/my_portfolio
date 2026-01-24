@@ -59,7 +59,7 @@ export const getProjects = (): Project[] => {
     metrics: parseList(data.metrics),
     role: String(data.role ?? ""),
     year: String(data.year ?? ""),
-    html: marked.parse(content),
+    html: marked.parse(content, { async: false }),
   }));
 };
 
@@ -74,7 +74,7 @@ export const getPosts = (): Post[] => {
     summary: String(data.summary ?? ""),
     date: String(data.date ?? ""),
     tags: parseList(data.tags),
-    html: marked.parse(content),
+    html: marked.parse(content, { async: false }),
   }));
 };
 
