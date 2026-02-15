@@ -2,7 +2,11 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
+import ProjectGallery from "@/components/ProjectGallery";
 import { getProjectBySlug, getProjects } from "@/lib/content";
+
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 export function generateStaticParams() {
   return getProjects().map((project) => ({ slug: project.slug }));
@@ -33,16 +37,23 @@ export default function ProjectDetail({
             <span>{project.role}</span>
             <span>{project.year}</span>
           </div>
-          <img
-            className="detail-image"
-            src={project.image}
-            alt={`${project.title} app preview`}
+          <div className="detail-stats">
+            {project.metrics.map((item) => (
+              <span key={item} className="stat-chip">
+                {item}
+              </span>
+            ))}
+          </div>
+          <ProjectGallery
+            images={project.gallery}
+            fallbackImage={project.image}
+            title={project.title}
           />
         </section>
 
         <section className="detail-grid" data-reveal>
           <div>
-            <h2>Highlights</h2>
+            <h2>Description</h2>
             <div dangerouslySetInnerHTML={{ __html: project.html }} />
           </div>
           <div>
@@ -54,12 +65,21 @@ export default function ProjectDetail({
                 </span>
               ))}
             </div>
-            <h2>Impact</h2>
-            <ul>
-              {project.metrics.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
+          </div>
+        </section>
+
+        <section className="detail-gallery-grid" data-reveal>
+          <h2>Screens</h2>
+          <div className="gallery-grid">
+            {(project.gallery.length > 0 ? project.gallery : [project.image]).map(
+              (image) => (
+                <img
+                  key={image}
+                  src={image}
+                  alt={`${project.title} screen`}
+                />
+              )
+            )}
           </div>
         </section>
       </main>

@@ -1,0 +1,17 @@
+
+Tech Stack:
+
+
+1.Kotlin – Used as the primary language for building a robust and scalable Android driver app
+
+2.Jetpack Compose – Implemented for a modern, declarative UI with smooth animations and faster development
+
+3.REST APIs – Handle core backend communication such as login, trip management, earnings, and driver profile
+
+4.WebSockets – Enable real-time communication for live trip updates and driver status changes
+
+5.Pusher – Used for instant ride request delivery and real-time event handling
+
+6.Push Notifications – Ensure drivers receive ride requests and important alerts even when the app is closed
+
+7.Google Maps – Integrated for live driver location tracking, route navigation, and ETA calculation

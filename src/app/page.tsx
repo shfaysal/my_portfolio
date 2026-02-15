@@ -1,4 +1,5 @@
 import ContactForm from "@/components/ContactForm";
+import ProjectCardMedia from "@/components/ProjectCardMedia";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import { getProjects } from "@/lib/content";
@@ -71,11 +72,10 @@ export default function Home() {
           <div className="grid">
             {projects.map((project) => (
               <article key={project.slug} className="card" data-reveal>
-                <img
-                  className="card-image"
-                  src={project.image}
-                  alt={`${project.title} app preview`}
-                  loading="lazy"
+                <ProjectCardMedia
+                  images={project.gallery}
+                  fallbackImage={project.image}
+                  title={project.title}
                 />
                 <h3>{project.title}</h3>
                 <p>{project.summary}</p>

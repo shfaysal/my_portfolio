@@ -12,6 +12,7 @@ export type Project = {
   metrics: string[];
   role: string;
   year: string;
+  gallery: string[];
   html: string;
 };
 
@@ -59,6 +60,7 @@ export const getProjects = (): Project[] => {
     metrics: parseList(data.metrics),
     role: String(data.role ?? ""),
     year: String(data.year ?? ""),
+    gallery: parseList(data.gallery),
     html: marked.parse(content, { async: false }),
   }));
 };
