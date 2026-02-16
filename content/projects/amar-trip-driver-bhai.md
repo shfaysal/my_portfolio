@@ -22,9 +22,3 @@ year: 2025
 - WebSockets and Pusher for real-time trip updates and instant ride requests.
 - Push notifications for alerts when the app is closed.
 - Google Maps for live location tracking, routing, and ETAs.
-
-## Screens
-![Home](/images/amar-trip-home.jpeg)
-![Trip flow](/images/amar-trip-trip.jpeg)
-![Notifications](/images/amar-trip-notification.jpeg)
-![Profile and wallet](/images/amar-trip-profile.jpeg)

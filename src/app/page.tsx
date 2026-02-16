@@ -3,6 +3,7 @@ import ProjectCardMedia from "@/components/ProjectCardMedia";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import { getProjects } from "@/lib/content";
+import Link from "next/link";
 
 export default function Home() {
   const projects = getProjects().slice(0, 3);
@@ -14,7 +15,8 @@ export default function Home() {
       <main>
         <section className="hero" id="top" data-reveal>
           <div className="hero-copy">
-            <p className="eyebrow">Android Developer</p>
+            <p className="hero-name-inline">Sazzad Hossain Foysal</p>
+            <p className="hero-title-inline">Android Developer</p>
             <h1>
               Building fast, reliable mobile experiences with Kotlin, Jetpack,
               and clean architecture.
@@ -37,27 +39,13 @@ export default function Home() {
               <span>Open to remote roles</span>
             </div>
           </div>
-          <div className="hero-card" data-reveal>
-            <div className="stat">
-              <p className="stat-title">Apps shipped</p>
-              <p className="stat-value">12+</p>
-            </div>
-            <div className="stat">
-              <p className="stat-title">Play Store rating</p>
-              <p className="stat-value">4.7 avg</p>
-            </div>
-            <div className="stat">
-              <p className="stat-title">Core stack</p>
-              <p className="stat-value">Kotlin, Compose</p>
-            </div>
-            <div className="tag-list">
-              <span>Jetpack Compose</span>
-              <span>Coroutines</span>
-              <span>Room</span>
-              <span>Hilt</span>
-              <span>Retrofit</span>
-              <span>Firebase</span>
-            </div>
+          <div className="hero-card hero-card-image" data-reveal>
+            <img
+              src="/rajib.jpeg"
+              alt="Sazzad Hossain Foysal"
+              className="hero-image"
+              loading="lazy"
+            />
           </div>
         </section>
 
@@ -84,7 +72,9 @@ export default function Home() {
                     <span key={item}>{item}</span>
                   ))}
                 </div>
-                <a href={`/projects/${project.slug}`}>Case study</a>
+                <Link href={`/projects/${encodeURIComponent(project.slug)}`}>
+                  Case study
+                </Link>
               </article>
             ))}
           </div>

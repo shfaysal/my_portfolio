@@ -23,7 +23,6 @@ export default function ProjectGallery({
   }, [images, fallbackImage]);
 
   const [index, setIndex] = useState(0);
-
   useEffect(() => {
     if (gallery.length <= 1) return;
     const timer = window.setInterval(() => {
@@ -42,26 +41,33 @@ export default function ProjectGallery({
 
   return (
     <div className="detail-gallery">
-      <img
-        className="detail-image"
-        src={gallery[index]}
-        alt={`${title} app preview ${index + 1}`}
-      />
       {gallery.length > 1 ? (
-        <div className="detail-pager" role="tablist" aria-label="Project gallery">
-          {gallery.map((_, i) => (
+        <div
+          className="detail-pager"
+          role="tablist"
+          aria-label="Project gallery"
+        >
+          {gallery.map((image, i) => (
             <button
-              key={`${gallery[i]}-${i}`}
-              className={i === index ? "pager-dot active" : "pager-dot"}
+              key={`${image}-${i}`}
+              className={i === index ? "pager-item active" : "pager-item"}
               type="button"
               onClick={() => setIndex(i)}
               aria-label={`Show image ${i + 1} of ${gallery.length}`}
               aria-selected={i === index}
               role="tab"
-            />
+            >
+              <img src={image} alt={`${title} thumbnail ${i + 1}`} />
+            </button>
           ))}
         </div>
-      ) : null}
+      ) : (
+        <div className="detail-pager single" aria-label="Project gallery">
+          <div className="pager-item active" aria-hidden="true">
+            <img src={gallery[0]} alt={`${title} thumbnail 1`} />
+          </div>
+        </div>
+      )}
     </div>
   );
 }

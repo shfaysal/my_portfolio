@@ -12,30 +12,35 @@ export function generateStaticParams() {
   return getProjects().map((project) => ({ slug: project.slug }));
 }
 
-export default function ProjectDetail({
+export default async function ProjectDetail({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
-  const project = getProjectBySlug(params.slug);
+  const { slug } = await params;
+  const project = getProjectBySlug(slug);
 
   if (!project) {
     notFound();
   }
+
+  const gallery = project.gallery.length > 0 ? project.gallery : [project.image];
 
   return (
     <div className="page">
       <SiteHeader />
       <main>
         <section className="detail-hero" data-reveal>
-          <Link className="back-link" href="/projects">
-            ← Back to projects
-          </Link>
+          <ProjectGallery
+            images={gallery}
+            fallbackImage={project.image}
+            title={project.title}
+          />
           <h1>{project.title}</h1>
           <p>{project.summary}</p>
-          <div className="detail-meta">
-            <span>{project.role}</span>
-            <span>{project.year}</span>
+          <div className="detail-body">
+            <h2>Description</h2>
+            <div dangerouslySetInnerHTML={{ __html: project.html }} />
           </div>
           <div className="detail-stats">
             {project.metrics.map((item) => (
@@ -44,18 +49,9 @@ export default function ProjectDetail({
               </span>
             ))}
           </div>
-          <ProjectGallery
-            images={project.gallery}
-            fallbackImage={project.image}
-            title={project.title}
-          />
         </section>
 
         <section className="detail-grid" data-reveal>
-          <div>
-            <h2>Description</h2>
-            <div dangerouslySetInnerHTML={{ __html: project.html }} />
-          </div>
           <div>
             <h2>Stack</h2>
             <div className="chip-row">
@@ -68,20 +64,6 @@ export default function ProjectDetail({
           </div>
         </section>
 
-        <section className="detail-gallery-grid" data-reveal>
-          <h2>Screens</h2>
-          <div className="gallery-grid">
-            {(project.gallery.length > 0 ? project.gallery : [project.image]).map(
-              (image) => (
-                <img
-                  key={image}
-                  src={image}
-                  alt={`${project.title} screen`}
-                />
-              )
-            )}
-          </div>
-        </section>
       </main>
       <SiteFooter />
     </div>

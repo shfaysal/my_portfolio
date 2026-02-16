@@ -34,7 +34,9 @@ export default function ProjectsPage() {
                   <span key={item}>{item}</span>
                 ))}
               </div>
-              <Link href={`/projects/${project.slug}`}>View case study</Link>
+              <Link href={`/projects/${encodeURIComponent(project.slug)}`}>
+                View case study
+              </Link>
             </article>
           ))}
         </section>
