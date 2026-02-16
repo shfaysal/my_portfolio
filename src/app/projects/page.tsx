@@ -1,10 +1,11 @@
 import Link from "next/link";
+import ProjectCardMedia from "@/components/ProjectCardMedia";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import { getProjects } from "@/lib/content";
 
 export default function ProjectsPage() {
-  const projects = getProjects();
+  const projects = getProjects().slice(0, 3);
 
   return (
     <div className="page">
@@ -21,11 +22,10 @@ export default function ProjectsPage() {
         <section className="list-grid" data-reveal>
           {projects.map((project) => (
             <article key={project.slug} className="card" data-reveal>
-              <img
-                className="card-image"
-                src={project.image}
-                alt={`${project.title} app preview`}
-                loading="lazy"
+              <ProjectCardMedia
+                images={project.gallery}
+                fallbackImage={project.image}
+                title={project.title}
               />
               <h3>{project.title}</h3>
               <p>{project.summary}</p>
@@ -34,7 +34,9 @@ export default function ProjectsPage() {
                   <span key={item}>{item}</span>
                 ))}
               </div>
-              <Link href={`/projects/${project.slug}`}>View case study</Link>
+              <Link href={`/projects/${encodeURIComponent(project.slug)}`}>
+                View case study
+              </Link>
             </article>
           ))}
         </section>

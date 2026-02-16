@@ -12,7 +12,9 @@ export type Project = {
   metrics: string[];
   role: string;
   year: string;
+  gallery: string[];
   html: string;
+  fileSlug: string;
 };
 
 export type Post = {
@@ -45,13 +47,22 @@ const readMarkdown = (folder: string) => {
   return files.map((file) => {
     const raw = fs.readFileSync(path.join(directory, file), "utf8");
     const { data, content } = matter(raw);
-    return { data, content };
+    return { data, content, fileSlug: path.basename(file, ".md") };
   });
 };
 
+const slugify = (value: string): string => {
+  return value
+    .trim()
+    .toLowerCase()
+    .replace(/['"]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+};
+
 export const getProjects = (): Project[] => {
-  return readMarkdown("projects").map(({ data, content }) => ({
-    slug: String(data.slug ?? ""),
+  return readMarkdown("projects").map(({ data, content, fileSlug }) => ({
+    slug: String(data.slug ?? fileSlug ?? ""),
     title: String(data.title ?? ""),
     summary: String(data.summary ?? ""),
     image: String(data.image ?? ""),
@@ -59,12 +70,26 @@ export const getProjects = (): Project[] => {
     metrics: parseList(data.metrics),
     role: String(data.role ?? ""),
     year: String(data.year ?? ""),
+    gallery: parseList(data.gallery),
     html: marked.parse(content, { async: false }),
+    fileSlug,
   }));
 };
 
+const normalizeSlug = (value: string): string => {
+  return decodeURIComponent(value).trim().toLowerCase();
+};
+
 export const getProjectBySlug = (slug: string): Project | null => {
-  return getProjects().find((project) => project.slug === slug) ?? null;
+  const normalized = normalizeSlug(slug);
+  return (
+    getProjects().find(
+      (project) =>
+        normalizeSlug(project.slug) === normalized ||
+        normalizeSlug(project.fileSlug) === normalized ||
+        slugify(project.title) === normalized
+    ) ?? null
+  );
 };
 
 export const getPosts = (): Post[] => {
