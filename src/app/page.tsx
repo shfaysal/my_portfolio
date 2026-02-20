@@ -41,7 +41,7 @@ export default function Home() {
           </div>
           <div className="hero-card hero-card-image" data-reveal>
             <img
-              src="/rajib.jpeg"
+              src="/sazzad.png"
               alt="Sazzad Hossain Foysal"
               className="hero-image"
               loading="lazy"
